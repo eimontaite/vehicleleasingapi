@@ -4,9 +4,7 @@ import eimontaite.aiste.vehicleleasingapi.models.Application;
 import eimontaite.aiste.vehicleleasingapi.models.ApplicationDTO;
 import eimontaite.aiste.vehicleleasingapi.services.ApplicationService;
 import org.modelmapper.ModelMapper;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class ApplicationController {
@@ -55,7 +53,13 @@ public class ApplicationController {
 				application.getRequestedAmount(),
 				application.getLeasingPeriod())
 		);
-		
+
 		return applicationService.create(application).getId();
+	}
+
+	@GetMapping("/applications/{id}")
+	public @ResponseBody
+	String getApplicationById(@PathVariable long id) {
+		return applicationService.getApplicationById(id).map(Application::getStatus).orElse("Application not found");
 	}
 }
