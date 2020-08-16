@@ -26,7 +26,13 @@ public class ApplicationController {
 		REJECTED
 	}
 
-	public String determineApplicationStatus(String maritalStatus, int numberOfChildren, int monthlyIncome, long requestedAmount, long leasingPeriod) {
+	public String determineApplicationStatus(
+			String maritalStatus,
+			int numberOfChildren,
+			int monthlyIncome,
+			long requestedAmount,
+			long leasingPeriod
+	) {
 		int familySize = 1;
 		if (maritalStatus.equals(MaritalStatus.MARRIED.toString())) {
 			familySize++;
