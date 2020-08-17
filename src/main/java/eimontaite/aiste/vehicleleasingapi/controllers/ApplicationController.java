@@ -4,7 +4,11 @@ import eimontaite.aiste.vehicleleasingapi.models.Application;
 import eimontaite.aiste.vehicleleasingapi.models.ApplicationDTO;
 import eimontaite.aiste.vehicleleasingapi.services.ApplicationService;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 public class ApplicationController {
@@ -17,7 +21,7 @@ public class ApplicationController {
 	}
 
 	@PostMapping(value = "/applications", consumes = "application/json", produces = "application/json")
-	public long createApplication(@RequestBody ApplicationDTO applicationDTO) {
+	public ResponseEntity<Object> createApplication(@RequestBody ApplicationDTO applicationDTO) {
 		ModelMapper modelMapper = new ModelMapper();
 		Application application = modelMapper.map(applicationDTO, Application.class);
 
@@ -29,7 +33,18 @@ public class ApplicationController {
 				application.getLeasingPeriod())
 		);
 
-		return applicationService.create(application).getId();
+		long applicationId = applicationService.create(application).getId();
+
+		Optional<Application> createdApplication = applicationService.getApplicationById(applicationId);
+
+		StringBuilder response = new StringBuilder();
+		response.append("Thank you. Your application status: ");
+		createdApplication.ifPresentOrElse(
+				a -> response.append(a.getStatus()),
+				() -> response.append("Failed to find application"));
+		response.append(", application ID: ");
+		response.append(applicationId);
+		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
 	@GetMapping("/applications/{id}")
