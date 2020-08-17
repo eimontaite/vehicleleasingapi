@@ -174,4 +174,25 @@ public class Application {
 	public String getStatus() {
 		return status;
 	}
+
+	public static String determineApplicationStatus(
+			String maritalStatus,
+			int numberOfChildren,
+			int monthlyIncome,
+			long requestedAmount,
+			long leasingPeriod
+	) {
+		int familySize = 1;
+		if (maritalStatus.equals(MaritalStatus.MARRIED.toString())) {
+			familySize++;
+		}
+
+		familySize += numberOfChildren;
+
+		if (((monthlyIncome - requestedAmount / leasingPeriod) / familySize) >= 600) {
+			return ApplicationStatus.APPROVED.toString();
+		} else {
+			return ApplicationStatus.REJECTED.toString();
+		}
+	}
 }

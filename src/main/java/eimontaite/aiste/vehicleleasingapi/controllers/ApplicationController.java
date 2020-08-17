@@ -2,8 +2,6 @@ package eimontaite.aiste.vehicleleasingapi.controllers;
 
 import eimontaite.aiste.vehicleleasingapi.models.Application;
 import eimontaite.aiste.vehicleleasingapi.models.ApplicationDTO;
-import eimontaite.aiste.vehicleleasingapi.models.ApplicationStatus;
-import eimontaite.aiste.vehicleleasingapi.models.MaritalStatus;
 import eimontaite.aiste.vehicleleasingapi.services.ApplicationService;
 import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.*;
@@ -18,33 +16,12 @@ public class ApplicationController {
 		this.applicationService = applicationService;
 	}
 
-	public String determineApplicationStatus(
-			String maritalStatus,
-			int numberOfChildren,
-			int monthlyIncome,
-			long requestedAmount,
-			long leasingPeriod
-	) {
-		int familySize = 1;
-		if (maritalStatus.equals(MaritalStatus.MARRIED.toString())) {
-			familySize++;
-		}
-
-		familySize += numberOfChildren;
-
-		if (((monthlyIncome - requestedAmount / leasingPeriod) / familySize) >= 600) {
-			return ApplicationStatus.APPROVED.toString();
-		} else {
-			return ApplicationStatus.REJECTED.toString();
-		}
-	}
-
 	@PostMapping(value = "/applications", consumes = "application/json", produces = "application/json")
 	public long createApplication(@RequestBody ApplicationDTO applicationDTO) {
 		ModelMapper modelMapper = new ModelMapper();
 		Application application = modelMapper.map(applicationDTO, Application.class);
 
-		application.setStatus(determineApplicationStatus(
+		application.setStatus(Application.determineApplicationStatus(
 				application.getMaritalStatus(),
 				application.getChildren(),
 				application.getFamilyMonthlyIncome(),
