@@ -1,7 +1,9 @@
 package eimontaite.aiste.vehicleleasingapi.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
 
+@Getter
 public class ApplicationDTO {
 	@JsonProperty("firstName")
 	public String firstName;
@@ -56,77 +58,5 @@ public class ApplicationDTO {
 
 	@JsonProperty("requestedAmount")
 	public int requestedAmount;
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public long getPersonalCode() {
-		return personalCode;
-	}
-
-	public String getTypeOfDocument() {
-		return typeOfDocument;
-	}
-
-	public String getDocumentNumber() {
-		return documentNumber;
-	}
-
-	public int getFamilyMonthlyIncome() {
-		return familyMonthlyIncome;
-	}
-
-	public String getMaritalStatus() {
-		return maritalStatus;
-	}
-
-	public int getChildren() {
-		return children;
-	}
-
-	public String getCountry() {
-		return country;
-	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public String getVehicleBrand() {
-		return vehicleBrand;
-	}
-
-	public String getVehicleModel() {
-		return vehicleModel;
-	}
-
-	public int getVehicleYear() {
-		return vehicleYear;
-	}
-
-	public int getVehiclePrice() {
-		return vehiclePrice;
-	}
-
-	public int getLeasingPeriod() {
-		return leasingPeriod;
-	}
-
-	public int getRequestedAmount() {
-		return requestedAmount;
-	}
 }
 

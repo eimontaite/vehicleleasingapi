@@ -1,12 +1,17 @@
 package eimontaite.aiste.vehicleleasingapi.models;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 @Entity
+@Setter
 @Table(name = "applications")
 public class Application {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Getter
 	@Column(name = "id")
 	private long id;
 
@@ -25,12 +30,15 @@ public class Application {
 	@Column(name = "document_number")
 	private String documentNumber;
 
+	@Getter
 	@Column(name = "family_monthly_income")
 	private int familyMonthlyIncome;
 
+	@Getter
 	@Column(name = "marital_status")
 	private String maritalStatus;
 
+	@Getter
 	@Column(name = "children")
 	private int children;
 
@@ -58,122 +66,17 @@ public class Application {
 	@Column(name = "vehicle_price")
 	private int vehiclePrice;
 
+	@Getter
 	@Column(name = "requested_amount")
 	private long requestedAmount;
 
+	@Getter
 	@Column(name = "leasing_period")
 	private long leasingPeriod;
 
+	@Getter
 	@Column(name = "status")
 	private String status;
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public void setPersonalCode(long personalCode) {
-		this.personalCode = personalCode;
-	}
-
-	public void setTypeOfDocument(String typeOfDocument) {
-		this.typeOfDocument = typeOfDocument;
-	}
-
-	public void setDocumentNumber(String documentNumber) {
-		this.documentNumber = documentNumber;
-	}
-
-	public void setFamilyMonthlyIncome(int familyMonthlyIncome) {
-		this.familyMonthlyIncome = familyMonthlyIncome;
-	}
-
-	public int getFamilyMonthlyIncome() {
-		return familyMonthlyIncome;
-	}
-
-	public void setMaritalStatus(String maritalStatus) {
-		this.maritalStatus = maritalStatus;
-	}
-
-	public String getMaritalStatus() {
-		return maritalStatus;
-	}
-
-	public void setChildren(int children) {
-		this.children = children;
-	}
-
-	public int getChildren() {
-		return children;
-	}
-
-	public void setCountry(String country) {
-		this.country = country;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public void setVehicleBrand(String vehicleBrand) {
-		this.vehicleBrand = vehicleBrand;
-	}
-
-	public void setVehicleModel(String vehicleModel) {
-		this.vehicleModel = vehicleModel;
-	}
-
-	public void setVehicleYear(int vehicleYear) {
-		this.vehicleYear = vehicleYear;
-	}
-
-	public void setVehiclePrice(int vehiclePrice) {
-		this.vehiclePrice = vehiclePrice;
-	}
-
-	public void setRequestedAmount(long requestedAmount) {
-		this.requestedAmount = requestedAmount;
-	}
-
-	public long getRequestedAmount() {
-		return requestedAmount;
-	}
-
-	public void setLeasingPeriod(long leasingPeriod) {
-		this.leasingPeriod = leasingPeriod;
-	}
-
-	public long getLeasingPeriod() {
-		return leasingPeriod;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	public String getStatus() {
-		return status;
-	}
 
 	public static String determineApplicationStatus(
 			String maritalStatus,
