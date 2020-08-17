@@ -48,8 +48,15 @@ public class ApplicationController {
 	}
 
 	@GetMapping("/applications/{id}")
-	public @ResponseBody
-	String getApplicationById(@PathVariable long id) {
-		return applicationService.getApplicationById(id).map(Application::getStatus).orElse("Application not found");
+	public ResponseEntity<Object> getApplicationById(@PathVariable long id) {
+		StringBuilder response = new StringBuilder();
+
+		applicationService
+				.getApplicationById(id)
+				.ifPresentOrElse(
+						a -> response.append("Your application status: ").append(a.getStatus()),
+						() -> response.append("Application not found"));
+
+		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 }
