@@ -2,6 +2,8 @@ package eimontaite.aiste.vehicleleasingapi.controllers;
 
 import eimontaite.aiste.vehicleleasingapi.models.Application;
 import eimontaite.aiste.vehicleleasingapi.models.ApplicationDTO;
+import eimontaite.aiste.vehicleleasingapi.models.ApplicationStatus;
+import eimontaite.aiste.vehicleleasingapi.models.MaritalStatus;
 import eimontaite.aiste.vehicleleasingapi.services.ApplicationService;
 import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.*;
@@ -14,16 +16,6 @@ public class ApplicationController {
 			ApplicationService applicationService
 	) {
 		this.applicationService = applicationService;
-	}
-
-	enum MaritalStatus {
-		MARRIED,
-		SINGLE
-	}
-
-	enum Status {
-		APPROVED,
-		REJECTED
 	}
 
 	public String determineApplicationStatus(
@@ -41,9 +33,9 @@ public class ApplicationController {
 		familySize += numberOfChildren;
 
 		if (((monthlyIncome - requestedAmount / leasingPeriod) / familySize) >= 600) {
-			return Status.APPROVED.toString();
+			return ApplicationStatus.APPROVED.toString();
 		} else {
-			return Status.REJECTED.toString();
+			return ApplicationStatus.REJECTED.toString();
 		}
 	}
 
