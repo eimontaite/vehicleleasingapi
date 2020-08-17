@@ -16,6 +16,10 @@ public class ApplicationServiceImpl implements ApplicationService {
 		this.applicationRepository = applicationRepository;
 	}
 
+	public ApplicationServiceImpl() {
+
+	}
+
 	@Override
 	public Optional<Application> getApplicationById(long applicationId) {
 		return applicationRepository.findById(applicationId);

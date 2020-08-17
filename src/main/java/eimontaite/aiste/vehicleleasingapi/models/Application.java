@@ -78,6 +78,28 @@ public class Application {
 	@Column(name = "status")
 	private String status;
 
+//	public Application(int id,
+//	                   String firstName,
+//	                   String lastName,
+//	                   int personalCode,
+//	                   String typeOfDocument,
+//	                   String documentNumber,
+//	                   int familyMonthlyIncome,
+//	                   String maritalStatus,
+//	                   int numberOfChildren,
+//	                   String country,
+//	                   String city,
+//	                   String address,
+//	                   String email,
+//	                   String vehicleBrand,
+//	                   String vehicleModel,
+//	                   int vehicleYear,
+//	                   int vehiclePrice,
+//	                   int requestedAmount,
+//	                   int leasingPeriod,
+//	                   String applicationStatus) {
+//	}
+
 	public static String determineApplicationStatus(
 			String maritalStatus,
 			int numberOfChildren,
